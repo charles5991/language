@@ -89,3 +89,19 @@ def updateCategory(request, categoryID):
         return render(request, template, {'form':form, 'category':category})
     category.save()
     return redirect(reverse('wiki:wiki'))
+
+def updatePage(request, pageID):
+    template = 'wiki/updatePage.html'
+    try:
+        page = Page.objects.get(id=pageID)
+    except Page.DoesNotExist:
+        return category(request, '')
+    if request.method=='GET':
+        form = PageForm(instance=page)
+        return render(request, template, {'form':form, 'page':page})
+    # request.method=='POST'
+    form = PageForm(request.POST, instance=page)
+    if not form.is_valid():
+        return render(request, template, {'form':form, 'page':page})
+    page.save()
+    return redirect(reverse('wiki:category', args=(page.category.id,)))

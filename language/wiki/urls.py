@@ -13,4 +13,6 @@ urlpatterns = [
  name='deletePage'),
     url(r'^updateCategory/(?P<categoryID>[0-9]+)/$', views.updateCategory,
  name='updateCategory'),
+    url(r'^updatePage/(?P<pageID>[0-9]+)/$', views.updatePage,
+ name='updatePage'),
 ]
