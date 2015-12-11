@@ -87,7 +87,7 @@ def updateCategory(request, categoryID):
     form = CategoryForm(request.POST, instance=category)
     if not form.is_valid():
         return render(request, template, {'form':form, 'category':category})
-    category.save()
+    form.save()
     return redirect(reverse('wiki:wiki'))
 
 def updatePage(request, pageID):
@@ -103,5 +103,5 @@ def updatePage(request, pageID):
     form = PageForm(request.POST, instance=page)
     if not form.is_valid():
         return render(request, template, {'form':form, 'page':page})
-    page.save()
+    form.save()
     return redirect(reverse('wiki:category', args=(page.category.id,)))
